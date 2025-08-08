@@ -70,7 +70,7 @@ jobs:
           # 创建nginx配置文件
           sudo tee /etc/nginx/conf.d/vue3-app.conf > /dev/null <<EOF
           server {
-              listen 80;
+              listen 8083;
               server_name _;
               root /var/www/vue3-app/current;
               index index.html;
