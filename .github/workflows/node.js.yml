@@ -84,8 +84,10 @@ jobs:
           fi
           NGINX_DIR="$(dirname "$NGINX_CONF_PATH")"
           
-          # 选择站点配置目录（优先 vhost 以适配宝塔，其次 conf.d）
-          if [ -d "$NGINX_DIR/vhost" ]; then
+          # 选择站点配置目录（优先宝塔面板路径，其次标准路径）
+          if [ -d "/www/server/panel/vhost/nginx" ]; then
+            SITE_DIR="/www/server/panel/vhost/nginx"
+          elif [ -d "$NGINX_DIR/vhost" ]; then
             SITE_DIR="$NGINX_DIR/vhost"
           elif [ -d "$NGINX_DIR/conf.d" ] || grep -q "include .*conf.d/\\*.conf" "$NGINX_CONF_PATH" 2>/dev/null; then
             SITE_DIR="$NGINX_DIR/conf.d"
